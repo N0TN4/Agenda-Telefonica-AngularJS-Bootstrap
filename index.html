@@ -1,14 +1,58 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
 <head>
 	<meta charset="utf-8">
-	<title>Lista Telefonica</title>
+	<title>Agenda Telefonica</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
-	<script src="angular.js">
 
+	<style>
+		.jumbotron{
+			width: 400px;
+			height: 500px;
+			margin: 0 auto;
+		}
+		.form-control{
+			margin-bottom: 10px;
+		}
+	</style>
+
+<script src="js/angular.js"> </script>
+	<script>
+		var app = angular.module("agendaTelefonica", []);
+		app.controller("agendaTelefonicaCtrl", function($scope)
+			{
+				$scope.titulo = "Agenda Telefonica";
+				$scope.contatos = {
+				nome: "antonio", telefone: "88461634"
+				};
+			});
 	</script>
 	
-	<body>
+	<body ng-app="agendaTelefonica" ng-controller="agendaTelefonicaCtrl">
+		<div class="jumbotron">
+				<h2> {{ titulo }}</h2>
+				<br>
+			<input class="form-control" type="text" placeholder="Nome" ng-model="nome">
+			<input class="form-control"  type="text" placeholder="Telefone" ng-model="telefone">
 
+			<button class="btn btn-success">Adicionar</button>
+			<button class="btn btn-danger">Deletar</button>
+			<table class= "table">
+				<tr>
+					<th>Nome</th>
+					<th>Telefone</th>
+				</tr>
+
+				<tr>
+					<td ng-repeat="contato in contatos"> {{ contato }}</td>
+					<td ng-repeat="contato in contatos"></td>
+				</tr>
+			</table>
+			{{contatos}}
+
+		</div>
 	</body>
+	
+
 </html>
