@@ -23,9 +23,15 @@
 		app.controller("agendaTelefonicaCtrl", function($scope)
 			{
 				$scope.titulo = "Agenda Telefonica";
-				$scope.contatos = {
-				nome: "antonio", telefone: "88461634"
-				};
+
+				$scope.contatos = [
+				{nome: "antonio", telefone: "88461634"},
+				];
+
+				$scope.adicionarContato = function(contato){
+					$scope.contatos.push(contato);
+					delete $scope.contato;
+				}
 			});
 	</script>
 	
@@ -33,22 +39,27 @@
 		<div class="jumbotron">
 				<h2> {{ titulo }}</h2>
 				<br>
-			<input class="form-control" type="text" placeholder="Nome" ng-model="nome">
-			<input class="form-control"  type="text" placeholder="Telefone" ng-model="telefone">
-
-			<button class="btn btn-success">Adicionar</button>
-			<button class="btn btn-danger">Deletar</button>
-			<table class= "table">
+				<table class= "table">
 				<tr>
 					<th>Nome</th>
 					<th>Telefone</th>
 				</tr>
 
-				<tr>
-					<td ng-repeat="contato in contatos"> {{ contato }}</td>
-					<td ng-repeat="contato in contatos"></td>
+				<tr ng-repeat="contato in contatos">
+					<td> {{ contato.nome }}</td>
+					<td> {{ contato.telefone}}</td>
 				</tr>
 			</table>
+
+			<input class="form-control" type="text" placeholder="Nome" ng-model="contato.nome">
+			<input class="form-control"  type="text" placeholder="Telefone" ng-model="contato.telefone">
+
+			<button class="btn btn-success" ng-click="adicionarContato(contato)">Adicionar</button>
+			<button class="btn btn-danger">Deletar</button>
+			
+			<br>
+			<br>
+			<p> Contatos array</p>
 			{{contatos}}
 
 		</div>
