@@ -25,27 +25,39 @@
 				$scope.titulo = "Agenda Telefonica";
 
 				$scope.contatos = [
-				{nome: "antonio", telefone: "88461634"},
+				{nome: "antonio", telefone: "88461634", selecionado: "false"},
 				];
 
 				$scope.adicionarContato = function(contato){
 					$scope.contatos.push(contato);
 					delete $scope.contato;
 				}
+
+
+				$scope.deletarContato = function (contatoSel){
+					console.log(contatoSel);
+					if(contatoSel)
+					{
+						$scope.contatos.splice(0, 1);;
+					}
+				};
 			});
 	</script>
 	
 	<body ng-app="agendaTelefonica" ng-controller="agendaTelefonicaCtrl">
 		<div class="jumbotron">
 				<h2> {{ titulo }}</h2>
+			
 				<br>
 				<table class= "table">
 				<tr>
+					<td>Selecionar</td>
 					<th>Nome</th>
 					<th>Telefone</th>
 				</tr>
 
 				<tr ng-repeat="contato in contatos">
+					<td> <center> <input class="form-check-input" type="checkbox" ng-model="contatos.selecionado"> </center> </td>
 					<td> {{ contato.nome }}</td>
 					<td> {{ contato.telefone}}</td>
 				</tr>
@@ -53,15 +65,17 @@
 
 			<input class="form-control" type="text" placeholder="Nome" ng-model="contato.nome">
 			<input class="form-control"  type="text" placeholder="Telefone" ng-model="contato.telefone">
+			<input type="text" placeholder="id" ng-model="contato.nome">
 
 			<button class="btn btn-success" ng-click="adicionarContato(contato)">Adicionar</button>
-			<button class="btn btn-danger">Deletar</button>
+			<button class="btn btn-danger" ng-click="deletarContato(contatos.selecionado)"> Deletar</button>
 			
 			<br>
 			<br>
 			<p> Contatos array</p>
-			{{contatos}}
+			
 
+			{{ contato }}
 		</div>
 	</body>
 	
