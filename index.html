@@ -4,79 +4,52 @@
 	<meta charset="utf-8">
 	<title>Agenda Telefonica</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
 </head>
 
-	<style>
-		.jumbotron{
-			width: 400px;
-			height: 500px;
-			margin: 0 auto;
-		}
-		.form-control{
-			margin-bottom: 10px;
-		}
-	</style>
-
 <script src="js/angular.js"> </script>
-	<script>
-		var app = angular.module("agendaTelefonica", []);
-		app.controller("agendaTelefonicaCtrl", function($scope)
-			{
-				$scope.titulo = "Agenda Telefonica";
-
-				$scope.contatos = [
-				{nome: "antonio", telefone: "88461634", selecionado: "false"},
-				];
-
-				$scope.adicionarContato = function(contato){
-					$scope.contatos.push(contato);
-					delete $scope.contato;
-				}
-
-
-				$scope.deletarContato = function (contatoSel){
-					console.log(contatoSel);
-					if(contatoSel)
-					{
-						$scope.contatos.splice(0, 1);;
-					}
-				};
-			});
-	</script>
 	
-	<body ng-app="agendaTelefonica" ng-controller="agendaTelefonicaCtrl">
-		<div class="jumbotron">
-				<h2> {{ titulo }}</h2>
-			
-				<br>
-				<table class= "table">
-				<tr>
-					<td>Selecionar</td>
-					<th>Nome</th>
-					<th>Telefone</th>
-				</tr>
+<div ng-app="myApp" ng-controller="myCtrl">
 
-				<tr ng-repeat="contato in contatos">
-					<td> <center> <input class="form-check-input" type="checkbox" ng-model="contatos.selecionado"> </center> </td>
-					<td> {{ contato.nome }}</td>
-					<td> {{ contato.telefone}}</td>
-				</tr>
-			</table>
+<div class="topo"> <h2> Agenda telefônica </h2></div>
+<div id="formulario">
+	<form>
+		<input class="form-control" type="text" placeholder="Nome" ng-model="contato.nome">
+	 	<input class="form-control" type="number" placeholder="Telefone" ng-model="contato.telefone">
+		<input class="form-control" type="email" placeholder="Email" ng-model="contato.email">
+	    <center> <div> 
+	    	<button class="btn btn-success" ng-click="adicionarContato(contato)">Adicionar</button>
+			<button class="btn btn-danger" ng-click="removerContato(agenda)">Remover</button>
+			<button class="btn btn-info" ng-click="atualizarContatos()">Atualizar</button>
+	</form>
+		</div></center>
+	</div>
 
-			<input class="form-control" type="text" placeholder="Nome" ng-model="contato.nome">
-			<input class="form-control"  type="text" placeholder="Telefone" ng-model="contato.telefone">
-			<input type="text" placeholder="id" ng-model="contato.nome">
 
-			<button class="btn btn-success" ng-click="adicionarContato(contato)">Adicionar</button>
-			<button class="btn btn-danger" ng-click="deletarContato(contatos.selecionado)"> Deletar</button>
-			
-			<br>
-			<br>
-			<p> Contatos array</p>
-			
+<!-- view da agenda -->
+<div class="tabela">
+	<table class="table table-striped">
+		<tr> 
+			<th> # </th>
+			<th> Nome</th>
+			<th> Telefone </th>
+			<th> Email</th>
+		</tr>
+		<tr ng-repeat="contatos in agenda">
+			<td> {{ contatos.id }}</td>
+			<td> {{ contatos.nome }}</td>
+			<td> {{ contatos.telefone }}</td>
+			<td> {{ contatos.email }}</td>
+		</tr>
+	</table>
+</div>
+	
+</div>
 
-			{{ contato }}
-		</div>
+<script src="js/code.js">
+
+
+</script>
 	</body>
 	
 
